@@ -9,7 +9,7 @@ import scala.io.Source
 
 trait LocalSaveFile {
 
-  def saveFile(tempFile: String): (String, String) = {
+  def saveFile(tempFile: String): (Array[Byte], String) = {
     val uniqueDate = new DateTime().getMillis
 
     val file = Source.fromFile(tempFile)
@@ -21,11 +21,11 @@ trait LocalSaveFile {
       .replace(" ", "+")
 
     val decodedImg = Base64.getDecoder().decode(img)
-
-    val bos = new BufferedOutputStream(new FileOutputStream(s"tmp/$fileName"))
-    bos.write(decodedImg)
-    file.close()
-    bos.close()
-    (fileName, name)
+    
+//    val bos = new BufferedOutputStream(new FileOutputStream(s"tmp/$fileName"))
+//    bos.write(decodedImg)
+//    file.close()
+//    bos.close()
+    (decodedImg, name)
   }
 }
