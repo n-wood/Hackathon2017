@@ -5,4 +5,4 @@ POST    /postPicture    controllers.getPicture.postPicture()
 GET     /searchByPicture    controllers.searchByPicture.getPicture()
 POST    /searchByPicture    controllers.searchByPicture.searchByPicture()
 
-GET     /test           controllers.getPicture.test()
+#GET     /test           controllers.getPicture.test()
