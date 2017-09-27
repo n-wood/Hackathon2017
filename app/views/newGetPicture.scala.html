@@ -74,12 +74,23 @@
 
             function prepImageForSaving()
             {
-              captureImage()
-              var canvas = document.getElementById('canvas');
-              document.getElementById('savedImage').value = canvas.toDataURL('image/png');
-              alert( document.getElementById('savedImage').value);
-              return true;
+                captureImage()
+                if (validateName()) {
+                    var canvas = document.getElementById('canvas');
+                    document.getElementById('savedImage').value = canvas.toDataURL('image/png');
+                    return true;
+                } else {
+                    alert("Please provide a first and last name")
+                    return false;
+                }
             }
+
+            function validateName()
+            {
+                var name = document.getElementById('fileName').value;
+                return /^\w+[ ]\w+$/.test(name);
+            }
+
     </script>
 
   </head>
