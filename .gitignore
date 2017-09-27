@@ -8,3 +8,8 @@ tmp/*
 /logs/
 *.csv
 tmp/.gitkeep
+/bin/
+.classpath
+.project
+.settings/
+
