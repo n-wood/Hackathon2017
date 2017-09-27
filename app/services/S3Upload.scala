@@ -24,11 +24,10 @@ trait S3Upload extends AWSCredentials {
     s3Client.putObject(BUCKET, fileName, fileToUpload)
   }
 
-  //name must be in the form firstname_secondname{numbers} < all lower case
+  //gets first img which has that name
   def getImg(name: String) = {
     val transformedName = name.replace(" ", "_")
     val pictures = s3Client.listObjects(BUCKET, transformedName)
-    //gets first image which has that name
     val imageKey = pictures.getObjectSummaries.iterator.next().getKey
     val s3Object = s3Client.getObject(BUCKET, imageKey)
     val bytes = IOUtils.toByteArray(s3Object.getObjectContent)
