@@ -88,14 +88,10 @@
 
     function prepImageForSaving()
     {
-
-	      var canvas = document.getElementById('canvas');
-	      document.getElementById('savedImage').value = canvas.toDataURL('image/png');
-	      alert( document.getElementById('savedImage').value);
-	      return true;
-
-
-     
+      var canvas = document.getElementById('canvas');
+      document.getElementById('savedImage').value = canvas.toDataURL('image/png');
+      alert( "Picture Uploaded" );
+      return true;
     }
 
    
