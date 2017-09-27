@@ -2,5 +2,8 @@
 GET     /getPicture     controllers.getPicture.getPicture()
 POST    /postPicture    controllers.getPicture.postPicture()
 
+GET     /uploadPicture  controllers.uploadPicture.getPicture()
+POST    /uploadPicture  controllers.uploadPicture.uploadPicture()
+
 GET     /searchByPicture    controllers.searchByPicture.getPicture()
 POST    /searchByPicture    controllers.searchByPicture.searchByPicture()

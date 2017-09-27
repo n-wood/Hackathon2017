@@ -12,7 +12,7 @@ trait LocalSaveFile {
   def saveFile(tempFile: String): (String, String) = {
     val uniqueDate = new DateTime().getMillis
 
-    val file = Source.fromFile(tempFile)
+    val file = Source.fromFile(tempFile, "ISO-8859-1")
     val lines = file.getLines.toStream
     val name = lines(3).toLowerCase.replace(" ", "_")
     val fileName = name + uniqueDate.toString + ".png"

@@ -1,0 +1,49 @@
+@(postAction: String)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    #video {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+    #photo {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+
+    #canvas {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+    .contentarea {
+      font-size: 16px;
+      font-family: "Lucida Grande", "Arial", sans-serif;
+      width: 760px;
+    }
+  </style>
+</head>
+
+<body onload="startVideo();">
+@helper.form(action = controllers.routes.uploadPicture.uploadPicture(), 'enctype -> "multipart/form-data") {
+
+<input type="file" name="picture">
+
+<p>
+    <input type="text" id="fileName" name="fileName">
+    <input type="submit">
+</p>
+}
+</body>
+
+</html>
