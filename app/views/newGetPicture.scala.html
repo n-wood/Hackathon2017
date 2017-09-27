@@ -1,0 +1,162 @@
+@(postAction: String)
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CWIN 2017</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="public/css/portfolio-item.css" rel="stylesheet">
+
+    <script>
+            function hasGetUserMedia() {
+              return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+              navigator.mozGetUserMedia || navigator.msGetUserMedia);
+            }
+
+            if (hasGetUserMedia()) {
+
+            } else {
+              alert('getUserMedia() is not supported in your browser. Please update to a recent version of Chrome or Firefox');
+            }
+            var errorCallback = function (e) {
+              console.log('Could be an old browser or a computer without a accessible webcam!', e);
+            };
+
+
+
+            function startVideo() {
+
+              navigator.getUserMedia = navigator.getUserMedia ||
+                      navigator.webkitGetUserMedia ||
+                      navigator.mozGetUserMedia ||
+                      navigator.msGetUserMedia;
+
+              var video = document.getElementById('video');
+
+
+              if (navigator.getUserMedia) {
+                navigator.getUserMedia(
+                        {
+                          audio: false,
+                          video: true,
+                          maxHeight: 480,
+                          maxWidth: 640
+                        },
+                        function (stream) {
+                          video.src = window.URL.createObjectURL(stream);
+                        },
+                        errorCallback);
+              } else {
+                video.src = 'somevideo.webm'; // fallback.
+              }
+            }
+
+            function captureImage()
+            {
+              var canvas = document.getElementById('canvas');
+              canvas.width  = 640;
+              canvas.height = 480;
+              var context = canvas.getContext("2d");
+
+              context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            }
+
+            function prepImageForSaving()
+            {
+              captureImage()
+              var canvas = document.getElementById('canvas');
+              document.getElementById('savedImage').value = canvas.toDataURL('image/png');
+              alert( document.getElementById('savedImage').value);
+              return true;
+            }
+    </script>
+
+  </head>
+
+    <body onload="startVideo();">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">CWIN Image Rekognition</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Take a photo
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Search a photo</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <br>
+      <br>
+      <br>
+        <canvas id="canvas" hidden></canvas>
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4">Smile!
+        <small>Take a photo using the button below</small>
+      </h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+            <video id="video" autoplay>Video stream not available.</video>
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">Project Description</h3>
+          <p> Blurb </p>
+          <h3 class="my-3">Enter your fullnames:</h3>
+          <form action=@postAction method="POST" enctype="multipart/form-data" onsubmit="return prepImageForSaving()">
+            <input type="text" id="fileName" name="fileName">
+            <input type="hidden" id="savedImage" name="savedImage">
+            <input type="submit" id="saveButton" name="saveButton">
+          </form>
+        </div>
+
+      </div>
+      <!-- /.row -->
+      <br>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark fixed-bottom">
+      <div class="container">
+        <p class="m-0 text-center text-white">Developed in a day by: Luke Roberts, Charlie Anglin, Nathan Wood, Dom Goodwin, Ethan Stewart, Jon Sugden</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="public/js/jquery.min.js"></script>
+    <script src="public/js/popper.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>

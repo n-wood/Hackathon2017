@@ -12,6 +12,10 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
     Ok(views.html.getPicture("http://localhost:9000/postPicture"))
   }
 
+  def getNewPicture() = Action {
+    Ok(views.html.newGetPicture("http://localhost:9000/postPicture"))
+  }
+
   def postPicture() = Action(parse.temporaryFile) { request =>
     val tempFile = "tmp/tempFileFile.txt"
     request.body.moveTo(new File(tempFile), true)
