@@ -7,3 +7,4 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.7"
 
 libraryDependencies += "com.amazonaws" % "aws-java-sdk" % "1.11.190"
+libraryDependencies += "commons-io" % "commons-io" % "2.4"

@@ -4,12 +4,16 @@ import java.io.File
 
 import play.api.mvc._
 import services.{LocalSaveFile, Rekog, S3Upload}
+import utils.Constants._
+
+import scala.util.Random
+
 
 class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile {
 
   def getPicture() = Action {
     //TODO: hardcoded to go to localhost:9000
-    Ok(views.html.getPicture("/postPicture"))
+    Ok(views.html.addPicture("/postPicture"))
   }
 
   def getNewPicture() = Action {
@@ -25,9 +29,13 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
     val faces = searchByFace(fileName)
     if (!faces.isEmpty) {
       val filteredFaces = filterFaces(faces)
-        .map(face => s" File already uploaded Name: '${face.getFace.getExternalImageId.replace("_", " ")}' with confidence: ${face.getFace.getConfidence.toString}")
-      val rekogname = filteredFaces(0).split("'")(1)
-      Ok(views.html.searchByPicture(filteredFaces, rekogname))
+      val facesWithPictures = filteredFaces.map { face =>
+        val name = face.getFace.getExternalImageId.replace("_", " ")
+        (s"Name: '$name' with confidence: ${face.getFace.getConfidence.toString}", getImg(name))
+      }
+      val spokenName = Random.shuffle(greetings.toList).head.replace("XXX", filteredFaces(0).getFace.getExternalImageId.replace("_", " "))
+
+      Ok(views.html.searchByPicture(facesWithPictures, spokenName))
     } else {
       uploadFile(fileName)
       indexFace(fileName, name)
