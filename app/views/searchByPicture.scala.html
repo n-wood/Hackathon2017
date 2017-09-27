@@ -1,0 +1,9 @@
+@(faces: List[String])
+<h1>Picture matches the following:</h1>
+@if(faces.isEmpty){
+<h1>No matches!</h1>
+}else{
+@for(face <- faces){
+<h1>@face</h1>
+}
+}

@@ -1,0 +1,115 @@
+@(postAction: String)
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+    #video {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+    #photo {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+
+    #canvas {
+      border: 1px solid black;
+      box-shadow: 2px 2px 3px black;
+      width: 640px;
+      height: 480px;
+    }
+
+    .contentarea {
+      font-size: 16px;
+      font-family: "Lucida Grande", "Arial", sans-serif;
+      width: 760px;
+    }
+  </style>
+    <script>
+    function hasGetUserMedia() {
+      return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia || navigator.msGetUserMedia);
+    }
+
+    if (hasGetUserMedia()) {
+
+    } else {
+      alert('getUserMedia() is not supported in your browser. Please update to a recent version of Chrome or Firefox');
+    }
+    var errorCallback = function (e) {
+      console.log('Could be an old browser or a computer without a accessible webcam!', e);
+    };
+
+
+
+    function startVideo() {
+
+      navigator.getUserMedia = navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+
+      var video = document.getElementById('video');
+
+
+      if (navigator.getUserMedia) {
+        navigator.getUserMedia(
+          {
+            audio: false,
+            video: true,
+            maxHeight: 480,
+            maxWidth: 640
+          },
+          function (stream) {
+            video.src = window.URL.createObjectURL(stream);
+          },
+          errorCallback);
+      } else {
+        video.src = 'somevideo.webm'; // fallback.
+      }
+    }
+
+    function captureImage()
+    {
+      var canvas = document.getElementById('canvas');
+      canvas.width  = 640;
+      canvas.height = 480;
+      var context = canvas.getContext("2d");
+
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    }
+
+    function prepImageForSaving()
+    {
+      var canvas = document.getElementById('canvas');
+      document.getElementById('savedImage').value = canvas.toDataURL('image/png');
+      alert( document.getElementById('savedImage').value);
+      return true;
+    }
+  </script>
+</head>
+
+<body onload="startVideo();">
+<div class="camera">
+    <video id="video" autoplay>Video stream not available.</video>
+    <button id="startbutton" onclick="captureImage();">Take photo</button>
+</div>
+<canvas id="canvas">
+</canvas>
+<form action=@postAction method="POST" enctype="multipart/form-data" onsubmit="return prepImageForSaving()">
+    <input type="text" id="fileName" name="fileName">
+    <input type="hidden" id="savedImage" name="savedImage">
+    <input type="submit" id="saveButton" name="saveButton">
+</form>
+
+</body>
+
+</html>
