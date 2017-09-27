@@ -1,9 +1,14 @@
 package controllers
 
-import java.io.File
+import java.io.{BufferedReader, File, InputStream, InputStreamReader}
+import java.nio.charset.{Charset, StandardCharsets}
+import org.apache.commons.codec.binary.Base64
 
+import org.apache.commons.io.IOUtils
+import org.apache.commons.io.input.ReaderInputStream
 import play.api.mvc._
 import services.{LocalSaveFile, Rekog, S3Upload}
+
 
 class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile {
 
@@ -21,5 +26,13 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
     indexFace(fileName, name)
 
     Ok(s"File uploaded to S3 and indexed in Rekognition \n fileName: $fileName")
+  }
+
+  def test() = Action {
+    val img = getFile("charlie_anglin")
+    val bytes = IOUtils.toByteArray(img.getObjectContent)
+    val bytes64 = Base64.encodeBase64(bytes)
+    val content = new String(bytes64, "UTF-8")
+    Ok(views.html.test("data:image/png;base64," + content))
   }
 }
