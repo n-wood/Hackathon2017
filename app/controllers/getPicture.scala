@@ -13,7 +13,7 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
 
   def getPicture() = Action {
     //TODO: hardcoded to go to localhost:9000
-    Ok(views.html.getPicture("/postPicture"))
+    Ok(views.html.addPicture("/postPicture"))
   }
 
   def getNewPicture() = Action {
