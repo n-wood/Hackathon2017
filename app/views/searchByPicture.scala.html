@@ -1,9 +1,15 @@
-@(faces: List[String])
-<h1>Picture matches the following:</h1>
-@if(faces.isEmpty){
-<h1>No matches!</h1>
-}else{
-@for(face <- faces){
-<h1>@face</h1>
-}
-}
+@(faces: List[String], name: String)
+<html>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <h1>Picture matches the following:</h1>
+        @if(faces.isEmpty){
+            <body>
+            <h1>No matches!</h1>
+        } else {
+        @for(face <- faces){
+            <body onload='responsiveVoice.speak("@name");'>
+            <h1>@face</h1>
+            }
+        }
+</body>
+</html>

@@ -20,6 +20,7 @@ class searchByPicture extends Controller with Rekog with LocalSaveFile {
     val faces = searchByFace(fileName)
     val filteredFaces = filterFaces(faces)
       .map(face => s"Name: '${face.getFace.getExternalImageId.replace("_", " ")}' with confidence: ${face.getFace.getConfidence.toString}")
-    Ok(views.html.searchByPicture(filteredFaces))
+    val rekogname = filteredFaces(0).split("'")(1)
+    Ok(views.html.searchByPicture(filteredFaces, s"Hello $rekogname"))
   }
 }
