@@ -1,0 +1,10 @@
+
+/target/
+/.idea/
+project/project
+project/target
+tmp/*
+!tmp/.gitkeep
+/logs/
+*.csv
+tmp/.gitkeep
