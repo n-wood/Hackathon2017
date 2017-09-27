@@ -11,7 +11,7 @@ class searchByPicture extends Controller with Rekog with LocalSaveFile {
 
   def getPicture() = Action {
     //TODO: hardcoded to go to localhost:9000
-    Ok(views.html.getPicture("http://localhost:9000/searchByPicture"))
+    Ok(views.html.getPicture("/searchByPicture"))
   }
 
   def searchByPicture = Action(parse.temporaryFile) { request =>
