@@ -39,7 +39,7 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
     } else {
       uploadFile(fileName)
       indexFace(fileName, name)
-      Ok(s"File uploaded to S3 and indexed in Rekognition \n fileName: $fileName")
+      Ok(views.html.searchNewPicture("/searchByPicture"))
     }
   }
 }

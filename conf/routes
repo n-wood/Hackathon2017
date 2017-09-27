@@ -1,4 +1,4 @@
-GET         /                        controllers.getPicture.getPicture()
+GET         /                        controllers.getPicture.getNewPicture()s
 
 GET         /getPicture              controllers.getPicture.getPicture()
 POST        /postPicture             controllers.getPicture.postPicture()
