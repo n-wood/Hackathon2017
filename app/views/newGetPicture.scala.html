@@ -77,7 +77,7 @@
               captureImage()
               var canvas = document.getElementById('canvas');
               document.getElementById('savedImage').value = canvas.toDataURL('image/png');
-              alert( document.getElementById('savedImage').value);
+              //alert( document.getElementById('savedImage').value);
               return true;
             }
     </script>
@@ -128,7 +128,7 @@
 
         <div class="col-md-4">
           <h3 class="my-3">Project Description</h3>
-          <p>Enter name, capture picture, submit</p>
+          <p>Enter full name, pose for the picture and then click submit</p>
           <h3 class="my-3">Enter your fullname:</h3>
           <form action=@postAction method="POST" enctype="multipart/form-data" onsubmit="return prepImageForSaving()">
             <input type="text" id="fileName" name="fileName">
