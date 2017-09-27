@@ -1,11 +1,12 @@
-GET     /               controllers.getPicture.getPicture()
+GET         /                        controllers.getPicture.getPicture()
 
-GET         /getPicture             controllers.getPicture.getPicture()
-POST        /postPicture            controllers.getPicture.postPicture()
+GET         /getPicture              controllers.getPicture.getPicture()
+POST        /postPicture             controllers.getPicture.postPicture()
 
-GET         /getNewPicture          controllers.getPicture.getNewPicture()
+GET         /getNewPicture           controllers.getPicture.getNewPicture()
+GET         /searchNewPicture        controllers.searchByPicture.getNewPicture()
 
-GET         /searchByPicture        controllers.searchByPicture.getPicture()
-POST        /searchByPicture        controllers.searchByPicture.searchByPicture()
+GET         /searchByPicture         controllers.searchByPicture.getPicture()
+POST        /searchByPicture         controllers.searchByPicture.searchByPicture()
 
 GET         /public/*file           controllers.Assets.at(path="/public", file)
