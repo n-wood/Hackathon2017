@@ -9,4 +9,8 @@ GET         /searchNewPicture        controllers.searchByPicture.getNewPicture()
 GET         /searchByPicture         controllers.searchByPicture.getPicture()
 POST        /searchByPicture         controllers.searchByPicture.searchByPicture()
 
+<<<<<<< HEAD
 GET         /public/*file            controllers.Assets.at(path="/public", file)
+=======
+GET         /public/*file           controllers.Assets.at(path="/public", file)
+>>>>>>> 67f241b8eda0869be200db0313c65a81e073b086
