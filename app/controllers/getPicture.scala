@@ -13,12 +13,13 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
   }
 
   def postPicture() = Action(parse.temporaryFile) { request =>
-    val tempFile = "tmp/tempFileFile.txt"
-    request.body.moveTo(new File(tempFile), true)
+    //val tempFile = "tmp/tempFileFile.txt"
+    //request.body.moveTo(new File(tempFile), true)
 
-    val (fileName, name) = saveFile(tempFile)
+    val image = saveFile(request.body.toString())
 
-    val faces = searchByFace(fileName)
+    val a =  image._1
+    val faces = searchByFace(a)
     if (!faces.isEmpty) {
       val filteredFaces = filterFaces(faces)
         .map(face => s" File already uploaded Name: '${face.getFace.getExternalImageId.replace("_", " ")}' with confidence: ${face.getFace.getConfidence.toString}")

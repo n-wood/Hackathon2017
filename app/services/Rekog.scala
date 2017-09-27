@@ -32,15 +32,11 @@ trait Rekog extends AWSCredentials {
     rekognitionClient.indexFaces(request).getFaceRecords
   }
 
-  def searchByFace(fileName: String): List[FaceMatch] = {
-    val file = new FileInputStream(s"tmp/$fileName")
-    val fChan = file.getChannel()
-    val fSize = fChan.size()
-    val mBuf = ByteBuffer.allocate(fSize.toInt)
-    fChan.read(mBuf)
-    mBuf.rewind()
-    fChan.close()
-    file.close()
+  def searchByFace(file: Array[Byte]): List[FaceMatch] = {
+
+    val mBuf = ByteBuffer.allocate(file.length-1)
+
+
 
     val request = new SearchFacesByImageRequest()
       .withCollectionId(COLLECTION)
