@@ -26,9 +26,9 @@ class getPicture extends Controller with S3Upload with Rekog with LocalSaveFile 
       val rekogname = filteredFaces(0).split("'")(1)
       Ok(views.html.searchByPicture(filteredFaces, rekogname))
     } else {
-      uploadFile(fileName)
-      indexFace(fileName, name)
-      Ok(s"File uploaded to S3 and indexed in Rekognition \n fileName: $fileName")
+      uploadFile(image._2, image._1)
+//      indexFace(image._2, image._1)
+      Ok(s"File uploaded to S3 and indexed in Rekognition \n fileName: $image._1")
     }
   }
 }

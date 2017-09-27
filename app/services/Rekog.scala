@@ -36,8 +36,6 @@ trait Rekog extends AWSCredentials {
 
     val mBuf = ByteBuffer.allocate(file.length-1)
 
-
-
     val request = new SearchFacesByImageRequest()
       .withCollectionId(COLLECTION)
       .withImage(new Image()

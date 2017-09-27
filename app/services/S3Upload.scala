@@ -5,6 +5,7 @@ import java.io.File
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
+import com.amazonaws.services.s3.model.ObjectMetadata
 import utils.Constants._
 
 trait S3Upload extends AWSCredentials {
@@ -16,9 +17,11 @@ trait S3Upload extends AWSCredentials {
     .withCredentials(new AWSStaticCredentialsProvider(yourAWSCredentials))
     .build()
 
-  def uploadFile(fileName: String) = {
-    val fileToUpload = new File(s"tmp/$fileName")
-
-    s3Client.putObject(BUCKET, fileName, fileToUpload)
+  def uploadFile(fileName: String, fileBytes: Array[Byte]) = {
+    val metadata: ObjectMetadata = new ObjectMetadata()
+    metadata.setContentType("image/png")
+    metadata.setContentLength(fileBytes.length-1)
+    s3Client.putObject(BUCKET, fileName, fileBytes)
+    s3Client.put
   }
 }
